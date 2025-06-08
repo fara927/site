@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Красота России</title>
+  
+  <!-- Оптимизация для производительности -->
+  <meta name="theme-color" content="#000000" />
+  <meta name="color-scheme" content="dark light" />
+  
+  <!-- Предзагрузка критических стилей -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Отложенная загрузка некритических стилей -->
+  <link rel="preload" href="https://unpkg.com/aos@next/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"></noscript>
+  
+  <!-- Предзагрузка критических изображений -->
+  <link rel="preload" href="image/baikal.jpg" as="image" fetchpriority="high" />
+  
+  <!-- Отложенная загрузка других изображений -->
+  <link rel="preload" href="image/kamchatka.jpg" as="image" fetchpriority="low" />
+  <link rel="preload" href="image/altai.jpg" as="image" fetchpriority="low" />
+  <link rel="preload" href="image/karelia.jpg" as="image" fetchpriority="low" />
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px; /* Высота навигационной панели */
+    }
+    
+    /* Критические стили для предотвращения скачков контента */
+    .section {
+      height: 100vh;
+      width: 100%;
+      position: relative;
+    }
+    
+    .parallax-bg {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .panorama-section {
+      padding: 100px 20px;
+    }
+    
+    .panorama-viewers {
+      height: 500px;
+      position: relative;
+    }
+    
+    @media (max-width: 768px) {
+      .panorama-viewers {
+        height: 300px;
+      }
+      
+      /* Отключаем parallax на мобильных устройствах для лучшей производительности */
+      .parallax-bg {
+        background-attachment: scroll;
+      }
+    }
+  </style>
+  
+  <!-- Отложенная загрузка Pannellum для 360° панорам -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"></noscript>
+  <script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">Красота России</div>
+      <ul class="nav-links">
+        <li><a href="#baikal">Байкал</a></li>
+        <li><a href="#kamchatka">Камчатка</a></li>
+        <li><a href="#altai">Алтай</a></li>
+        <li><a href="#karelia">Карелия</a></li>
+        <li><a href="#panoramas">360° туры</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="baikal" class="section parallax-bg" style="background-image: url('image/baikal.jpg');">
+    <div class="overlay"></div>
+    <div class="content" data-aos="fade-up" data-aos-duration="1000">
+      <h1>Озеро Байкал</h1>
+      <p>Самое глубокое озеро в мире, чистейшая вода и удивительная природа Сибири.</p>
+    </div>
+  </section>
+
+  <section id="kamchatka" class="section parallax-bg" loading="lazy" style="background-image: url('image/kamchatka.jpg');">
+    <div class="overlay"></div>
+    <div class="content" data-aos="fade-up" data-aos-duration="1000">
+      <h1>Камчатка</h1>
+      <p>Вулканы, гейзеры и медведи — дикая красота Дальнего Востока.</p>
+    </div>
+  </section>
+
+  <section id="altai" class="section parallax-bg" loading="lazy" style="background-image: url('image/altai.jpg');">
+    <div class="overlay"></div>
+    <div class="content" data-aos="fade-up" data-aos-duration="1000">
+      <h1>Алтай</h1>
+      <p>Горы, реки и древние легенды — идеальное место для походов и уединения.</p>
+    </div>
+  </section>
+
+  <section id="karelia" class="section parallax-bg" loading="lazy" style="background-image: url('image/karelia.jpg');">
+    <div class="overlay"></div>
+    <div class="content" data-aos="fade-up" data-aos-duration="1000">
+      <h1>Карелия</h1>
+      <p>Тысячи озёр, скал и сосновых лесов на границе с Финляндией.</p>
+    </div>
+  </section>
+
+  <section id="panoramas" class="panorama-section">
+    <h2 data-aos="fade-up">Виртуальные туры 360°</h2>
+    <p class="panorama-intro" data-aos="fade-up" data-aos-delay="100">Исследуйте красоту России в формате виртуальной реальности</p>
+    
+    <div class="panorama-container" data-aos="zoom-in" data-aos-delay="200">
+      <div class="panorama-tabs">
+        <button class="panorama-tab active" data-target="baikal-panorama">Байкал</button>
+        <button class="panorama-tab" data-target="kamchatka-panorama">Камчатка</button>
+        <button class="panorama-tab" data-target="altai-panorama">Алтай</button>
+        <button class="panorama-tab" data-target="karelia-panorama">Карелия</button>
+      </div>
+      
+      <div class="panorama-viewers">
+        <div id="baikal-panorama" class="panorama-viewer active">
+          <div class="panorama-loading">Загрузка панорамы...</div>
+        </div>
+        <div id="kamchatka-panorama" class="panorama-viewer"></div>
+        <div id="altai-panorama" class="panorama-viewer"></div>
+        <div id="karelia-panorama" class="panorama-viewer"></div>
+      </div>
+      
+      <div class="panorama-info">
+        <h3 id="panorama-title">Озеро Байкал - Виртуальный тур</h3>
+        <p id="panorama-description">Исследуйте красоту зимнего Байкала с его знаменитым прозрачным льдом и потрясающими видами.</p>
+        <div class="vr-instructions">
+          <p><strong>Управление:</strong> Используйте мышь для поворота камеры. Колесико мыши для приближения/отдаления. На мобильных устройствах используйте касания и повороты устройства.</p>
+          <p><strong>Интерактивные точки:</strong> Нажимайте на цветные точки для получения информации или перехода к другим локациям. <span style="color: #00abff;">Синие точки</span> - информация о месте, <span style="color: #ff9800;">Оранжевые точки</span> - переход к другой локации.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="map-section">
+    <h2 data-aos="fade-up">Красота России на карте</h2>
+    <div class="russia-map" data-aos="fade-up" data-aos-delay="100">
+      <svg id="russia-map-svg" viewBox="0 0 1000 600">
+        <path class="russia-outline" d="M100,300 C150,200 300,150 500,200 C700,250 850,200 900,300 C950,400 900,500 800,550 C600,600 300,550 200,450 C150,400 50,400 100,300 Z"></path>
+        <circle class="map-marker" cx="350" cy="350" r="10" data-location="baikal"></circle>
+        <text x="365" y="350" class="map-label">Байкал</text>
+        <circle class="map-marker" cx="800" cy="300" r="10" data-location="kamchatka"></circle>
+        <text x="815" y="300" class="map-label">Камчатка</text>
+        <circle class="map-marker" cx="250" cy="400" r="10" data-location="altai"></circle>
+        <text x="265" y="400" class="map-label">Алтай</text>
+        <circle class="map-marker" cx="180" cy="250" r="10" data-location="karelia"></circle>
+        <text x="195" y="250" class="map-label">Карелия</text>
+      </svg>
+    </div>
+  </div>
+
+  <button class="back-to-top" aria-label="Вернуться наверх">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+      <path fill="none" d="M0 0h24v24H0z"/>
+      <path d="M12 4l8 8h-6v8h-4v-8H4z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <!-- Отложенная загрузка AOS -->
+  <script defer src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  
+  <!-- Основной скрипт -->
+  <script defer src="script.js"></script>
+</body>
+</html>
